@@ -1,0 +1,43 @@
+######################
+#  Debug properties
+######################
+polite.debugging=false
+polite.debuging.output=
+
+######################
+#  Time print format
+######################
+polite.util.Logger.timeFormat=HH:mm:ss
+
+######################
+# Method List
+######################
+polite.abstractLanguage.Node.Assign=false
+polite.abstractLanguage.Node.Call=false
+polite.abstractLanguage.Node.FunDef=false
+polite.abstractLanguage.Node.Global=false
+polite.abstractLanguage.Node.Identifier=false
+polite.abstractLanguage.Node.IfElse=false
+polite.abstractLanguage.Node.IfElse.ElseBlockHelper=true
+polite.abstractLanguage.Node.IfElse.ElseBlockHelper-Node=true
+polite.abstractLanguage.Node.Literal=false
+polite.abstractLanguage.Node.Module=false
+polite.abstractLanguage.Node.NodeList=true
+polite.abstractLanguage.Node.Print=false
+polite.abstractLanguage.Node.Return=false
+polite.abstractLanguage.Node.While=false
+polite.abstractLanguage.SymbolTable=false
+polite.interpreter.Interpreter=true
+polite.interpreter.RecordManager=true
+polite.interpreter.RecordManager.ActivationRecord=true
+polite.interpreter.basicTypes.BuiltInFunctions.BuiltInFunction=true
+polite.interpreter.basicTypes.MyBoolean=true
+polite.interpreter.basicTypes.MyFunction=true
+polite.interpreter.basicTypes.MyInteger=true
+polite.interpreter.basicTypes.MyInteger-select=true
+polite.interpreter.basicTypes.MyList=true
+polite.interpreter.basicTypes.MyObj=true
+polite.interpreter.basicTypes.MyReal=true
+polite.interpreter.basicTypes.MyString=true
+polite.interpreter.basicTypes.MyTuple=true
+polite.interpreter.basicTypes.MyType=true

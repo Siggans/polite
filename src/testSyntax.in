@@ -1,0 +1,252 @@
+
+counter=-10
+success_counter=0
+fail_counter=0
+testmain=''
+testsection=''
+
+def assert(actual,expected):
+	global counter,success_counter,fail_counter, testsection
+	if actual==expected:
+		success_counter=success_counter+1
+	else:
+		print testsection+": testcase "+str(counter)+" failed"
+		print '  >> expected : '+str(expected)
+		print '  >> actual : '+str(actual)
+		fail_counter=fail_counter+1
+	counter=counter+1
+ 
+def new_test_section(testname):
+	global counter, testsection, testmain
+	counter=1
+	testsection=testname
+	testmain=testsection
+	print 
+	print '>>> '+testname
+	
+def sub_test_section(sectionname):
+	global counter, testsection,testmain
+	counter=1
+	testsection=testmain+' - '+sectionname
+	print '>>> '+testsection
+
+def print_test_result():
+	global fail_counter,success_counter
+	print 
+	print 'Total testcases = '+ str(fail_counter+success_counter),'  ',
+	print 'Successful: '+str(success_counter) 
+	
+####################################
+new_test_section('assert self test')
+
+assert( True, True)
+assert( False,False)
+
+####################################
+new_test_section('member test')
+a=2
+a.b=2
+assert(a,a.b)
+
+####################################
+new_test_section('first class test')
+
+def what(c):
+	def what_inner(b):
+		if c:
+			print "True,",
+			
+			if b: print "True",
+			else: print "False",
+			print "a=",a,; return c
+			
+			
+		else:
+			print "False,",
+			if b: print "True",
+			else: print "False",
+			print "a=",a, ; return c
+	return what_inner
+
+assert(what(a)(a.b),2)
+assert(what(0)(0.0),0)
+
+a=3;
+a.what=what
+
+assert(a.what()(0),3)
+
+a=0.0
+a.what=what
+
+assert(a.what()(3),0f)
+print
+
+###################################################
+new_test_section('reflection and overloading test')
+a=0.0
+assert(type(a),'type:float')
+assert(type(a.__getattr__),'type:built_in_function')
+
+a.b=3399
+assert(a.b,3399)
+
+def newgetattr(self,name): return name
+a.__getattr__=newgetattr
+assert(type(a.b), 'type:string')
+assert(type(newgetattr),'type:function')
+assert(a.b,'b')
+
+super(a,'__setattr__')(a,'__getattr__',super(a,'__getattr__'))
+assert(type(a.__getattr__),'type:built_in_function')
+
+#############################
+new_test_section('logic ops')
+assert(0 and 0, False)
+assert(0 and 1, False)
+assert(1 and 1, True)
+assert(1 and 0, False)
+assert(0.0 or 0.0, False)
+assert(1.1 or 0.0, True)
+assert(1.0 or 9.1, True)
+assert(0f or 3.4, True)
+assert( not '', True)
+assert( not None, True)
+assert( not 1, False)
+assert( not False, True)
+
+############################
+new_test_section('int relation test')
+sub_test_section('gt')
+assert(1>2, False)
+assert(2>1, True)
+assert(30>30,False)
+
+sub_test_section('ge')
+assert(-1>=-2, True)
+assert(-21>=-2, False)
+assert(302>302,False)
+
+sub_test_section('lt')
+assert(-1<-2, False)
+assert(-21<-2, True)
+assert(302<302,False)
+
+sub_test_section('le')
+assert(-1<=-2, False)
+assert(-21<=-2, True)
+assert(302<=302,True)
+
+sub_test_section('eq, ne')
+assert(1==2, False)
+assert(2==2, True)
+assert(1!=2, True)
+assert(2!=2, False)
+
+############################
+new_test_section('float relation test')
+sub_test_section('gt')
+assert(1f>2f, False)
+assert(2f>1f, True)
+assert(30f>30f,False)
+
+sub_test_section('ge')
+assert(-1f>=-2f, True)
+assert(-21f>=-2f, False)
+assert(302f>302f,False)
+
+sub_test_section('lt')
+assert(-1f<-2f, False)
+assert(-21f<-2f, True)
+assert(302f<302f,False)
+
+sub_test_section('le')
+assert(-1f<=-2f, False)
+assert(-21f<=-2f, True)
+assert(302f<=302f,True)
+
+sub_test_section('eq, ne')
+assert(1f==2f, False)
+assert(2f==2f, True)
+assert(1f!=2f, True)
+assert(2f!=2f, False)
+
+############################
+new_test_section('float int relation test')
+sub_test_section('gt')
+assert(1f>2, False)
+assert(2f>1, True)
+assert(30f>30,False)
+
+sub_test_section('ge')
+assert(-1f>=-2, True)
+assert(-21f>=-2, False)
+assert(302f>302,False)
+
+sub_test_section('lt')
+assert(-1f<-2, False)
+assert(-21f<-2, True)
+assert(302f<302,False)
+
+
+sub_test_section('le')
+assert(-1f<=-2, False)
+assert(-21f<=-2, True)
+assert(302f<=302,True)
+
+sub_test_section('eq, ne')
+assert(1f==2, False)
+assert(2f==2, True)
+assert(1f!=2, True)
+assert(2f!=2, False)
+
+############################
+new_test_section('int float relation test')
+sub_test_section('gt')
+assert(1>2f, False)
+assert(2>1f, True)
+assert(30>30f,False)
+
+sub_test_section('ge')
+assert(-1>=-2f, True)
+assert(-21>=-2f, False)
+assert(302>302f,False)
+
+sub_test_section('lt')
+assert(-1<-2f, False)
+assert(-21<-2f, True)
+assert(302<302f,False)
+
+sub_test_section('le')
+assert(-1<=-2f, False)
+assert(-21<=-2f, True)
+assert(302<=302f,True)
+
+sub_test_section('eq, ne')
+assert(1==2f, False)
+assert(2==2f, True)
+assert(1!=2f, True)
+assert(2!=2f, False)
+
+############################
+new_test_section('short arithmetic')
+assert (1 + 2*3 + 4/2 + 10,19)
+assert (1.2+2-3*5/2,-3.8)
+assert (1.2+2-3*5/2.0,-4.3)
+
+############################
+new_test_section('lambda function')
+assert((@y | y)(1),1)
+assert((@x, y| (@y,z| x+y+z)(x+1,y))(3,-3), 4)
+
+############################
+new_test_section('while test')
+ctrl=20
+var=0
+while ctrl>var:
+	var=var+1
+assert(var, 20)
+assert(ctrl, var)
+
+#####################################
+print_test_result()

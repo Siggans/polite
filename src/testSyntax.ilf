@@ -1,0 +1,2594 @@
+MODULE: __main__
+ +Symbol Table:
+    READONLY: None
+    READONLY: True
+    READONLY: False
+    READONLY: send
+    READONLY: int
+    READONLY: float
+    READONLY: str
+    READONLY: list
+    READONLY: tuple
+    READONLY: bool
+    READONLY: str
+    READONLY: len
+    READONLY: super
+    READONLY: type
+    READONLY: dir
+    READONLY: object
+    NORMAL: counter
+    NORMAL: success_counter
+    NORMAL: fail_counter
+    NORMAL: testmain
+    NORMAL: testsection
+    NORMAL: assert
+    NORMAL: new_test_section
+    NORMAL: sub_test_section
+    NORMAL: print_test_result
+    NORMAL: a
+    NORMAL: what
+    NORMAL: newgetattr
+    NORMAL: ctrl
+    NORMAL: var
+ +Statements:
+  | ASSIGN: counter
+  |     CALL:
+  |      +functionObj:
+  |       | CALL:
+  |       |  +functionObj:
+  |       |   | IDENTIFIER: send
+  |       |  +paramList:
+  |       |   | LITERAL: integer(10)
+  |       |   | LITERAL: string(__neg__)
+  |      +paramList:
+  | ASSIGN: success_counter
+  |     LITERAL: integer(0)
+  | ASSIGN: fail_counter
+  |     LITERAL: integer(0)
+  | ASSIGN: testmain
+  |     LITERAL: string()
+  | ASSIGN: testsection
+  |     LITERAL: string()
+  | FUNDEF: assert
+  |  +Symbol Table:
+  |     NORMAL: actual
+  |     NORMAL: expected
+  |     GLOBAL: counter
+  |     GLOBAL: success_counter
+  |     GLOBAL: fail_counter
+  |     GLOBAL: testsection
+  |     REFERENCEONLY: str
+  |  +paramList:
+  |   | IDENTIFIER: actual
+  |   | IDENTIFIER: expected
+  |  +Statements:
+  |   | GLOBAL: 
+  |   |     IDENTIFIER: counter
+  |   |     IDENTIFIER: success_counter
+  |   |     IDENTIFIER: fail_counter
+  |   |     IDENTIFIER: testsection
+  |   | IF:
+  |   |  +condition:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | IDENTIFIER: actual
+  |   |   |   |   | LITERAL: string(__eq__)
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: expected
+  |   |  +true:
+  |   |   | ASSIGN: success_counter
+  |   |   |     CALL:
+  |   |   |      +functionObj:
+  |   |   |       | CALL:
+  |   |   |       |  +functionObj:
+  |   |   |       |   | IDENTIFIER: send
+  |   |   |       |  +paramList:
+  |   |   |       |   | IDENTIFIER: success_counter
+  |   |   |       |   | LITERAL: string(__add__)
+  |   |   |      +paramList:
+  |   |   |       | LITERAL: integer(1)
+  |   |  +false:
+  |   |   | PRINT:  (\n)
+  |   |   |     CALL:
+  |   |   |      +functionObj:
+  |   |   |       | CALL:
+  |   |   |       |  +functionObj:
+  |   |   |       |   | IDENTIFIER: send
+  |   |   |       |  +paramList:
+  |   |   |       |   | CALL:
+  |   |   |       |   |  +functionObj:
+  |   |   |       |   |   | CALL:
+  |   |   |       |   |   |  +functionObj:
+  |   |   |       |   |   |   | IDENTIFIER: send
+  |   |   |       |   |   |  +paramList:
+  |   |   |       |   |   |   | CALL:
+  |   |   |       |   |   |   |  +functionObj:
+  |   |   |       |   |   |   |   | CALL:
+  |   |   |       |   |   |   |   |  +functionObj:
+  |   |   |       |   |   |   |   |   | IDENTIFIER: send
+  |   |   |       |   |   |   |   |  +paramList:
+  |   |   |       |   |   |   |   |   | IDENTIFIER: testsection
+  |   |   |       |   |   |   |   |   | LITERAL: string(__add__)
+  |   |   |       |   |   |   |  +paramList:
+  |   |   |       |   |   |   |   | LITERAL: string(: testcase )
+  |   |   |       |   |   |   | LITERAL: string(__add__)
+  |   |   |       |   |  +paramList:
+  |   |   |       |   |   | CALL:
+  |   |   |       |   |   |  +functionObj:
+  |   |   |       |   |   |   | IDENTIFIER: str
+  |   |   |       |   |   |  +paramList:
+  |   |   |       |   |   |   | IDENTIFIER: counter
+  |   |   |       |   | LITERAL: string(__add__)
+  |   |   |      +paramList:
+  |   |   |       | LITERAL: string( failed)
+  |   |   | PRINT:  (\n)
+  |   |   |     CALL:
+  |   |   |      +functionObj:
+  |   |   |       | CALL:
+  |   |   |       |  +functionObj:
+  |   |   |       |   | IDENTIFIER: send
+  |   |   |       |  +paramList:
+  |   |   |       |   | LITERAL: string(  >> expected : )
+  |   |   |       |   | LITERAL: string(__add__)
+  |   |   |      +paramList:
+  |   |   |       | CALL:
+  |   |   |       |  +functionObj:
+  |   |   |       |   | IDENTIFIER: str
+  |   |   |       |  +paramList:
+  |   |   |       |   | IDENTIFIER: expected
+  |   |   | PRINT:  (\n)
+  |   |   |     CALL:
+  |   |   |      +functionObj:
+  |   |   |       | CALL:
+  |   |   |       |  +functionObj:
+  |   |   |       |   | IDENTIFIER: send
+  |   |   |       |  +paramList:
+  |   |   |       |   | LITERAL: string(  >> actual : )
+  |   |   |       |   | LITERAL: string(__add__)
+  |   |   |      +paramList:
+  |   |   |       | CALL:
+  |   |   |       |  +functionObj:
+  |   |   |       |   | IDENTIFIER: str
+  |   |   |       |  +paramList:
+  |   |   |       |   | IDENTIFIER: actual
+  |   |   | ASSIGN: fail_counter
+  |   |   |     CALL:
+  |   |   |      +functionObj:
+  |   |   |       | CALL:
+  |   |   |       |  +functionObj:
+  |   |   |       |   | IDENTIFIER: send
+  |   |   |       |  +paramList:
+  |   |   |       |   | IDENTIFIER: fail_counter
+  |   |   |       |   | LITERAL: string(__add__)
+  |   |   |      +paramList:
+  |   |   |       | LITERAL: integer(1)
+  |   | ASSIGN: counter
+  |   |     CALL:
+  |   |      +functionObj:
+  |   |       | CALL:
+  |   |       |  +functionObj:
+  |   |       |   | IDENTIFIER: send
+  |   |       |  +paramList:
+  |   |       |   | IDENTIFIER: counter
+  |   |       |   | LITERAL: string(__add__)
+  |   |      +paramList:
+  |   |       | LITERAL: integer(1)
+  | FUNDEF: new_test_section
+  |  +Symbol Table:
+  |     NORMAL: testname
+  |     GLOBAL: counter
+  |     GLOBAL: testsection
+  |     GLOBAL: testmain
+  |  +paramList:
+  |   | IDENTIFIER: testname
+  |  +Statements:
+  |   | GLOBAL: 
+  |   |     IDENTIFIER: counter
+  |   |     IDENTIFIER: testsection
+  |   |     IDENTIFIER: testmain
+  |   | ASSIGN: counter
+  |   |     LITERAL: integer(1)
+  |   | ASSIGN: testsection
+  |   |     IDENTIFIER: testname
+  |   | ASSIGN: testmain
+  |   |     IDENTIFIER: testsection
+  |   | PRINT:  (\n)
+  |   | PRINT:  (\n)
+  |   |     CALL:
+  |   |      +functionObj:
+  |   |       | CALL:
+  |   |       |  +functionObj:
+  |   |       |   | IDENTIFIER: send
+  |   |       |  +paramList:
+  |   |       |   | LITERAL: string(>>> )
+  |   |       |   | LITERAL: string(__add__)
+  |   |      +paramList:
+  |   |       | IDENTIFIER: testname
+  | FUNDEF: sub_test_section
+  |  +Symbol Table:
+  |     NORMAL: sectionname
+  |     GLOBAL: counter
+  |     GLOBAL: testsection
+  |     GLOBAL: testmain
+  |  +paramList:
+  |   | IDENTIFIER: sectionname
+  |  +Statements:
+  |   | GLOBAL: 
+  |   |     IDENTIFIER: counter
+  |   |     IDENTIFIER: testsection
+  |   |     IDENTIFIER: testmain
+  |   | ASSIGN: counter
+  |   |     LITERAL: integer(1)
+  |   | ASSIGN: testsection
+  |   |     CALL:
+  |   |      +functionObj:
+  |   |       | CALL:
+  |   |       |  +functionObj:
+  |   |       |   | IDENTIFIER: send
+  |   |       |  +paramList:
+  |   |       |   | CALL:
+  |   |       |   |  +functionObj:
+  |   |       |   |   | CALL:
+  |   |       |   |   |  +functionObj:
+  |   |       |   |   |   | IDENTIFIER: send
+  |   |       |   |   |  +paramList:
+  |   |       |   |   |   | IDENTIFIER: testmain
+  |   |       |   |   |   | LITERAL: string(__add__)
+  |   |       |   |  +paramList:
+  |   |       |   |   | LITERAL: string( - )
+  |   |       |   | LITERAL: string(__add__)
+  |   |      +paramList:
+  |   |       | IDENTIFIER: sectionname
+  |   | PRINT:  (\n)
+  |   |     CALL:
+  |   |      +functionObj:
+  |   |       | CALL:
+  |   |       |  +functionObj:
+  |   |       |   | IDENTIFIER: send
+  |   |       |  +paramList:
+  |   |       |   | LITERAL: string(>>> )
+  |   |       |   | LITERAL: string(__add__)
+  |   |      +paramList:
+  |   |       | IDENTIFIER: testsection
+  | FUNDEF: print_test_result
+  |  +Symbol Table:
+  |     GLOBAL: fail_counter
+  |     GLOBAL: success_counter
+  |     REFERENCEONLY: str
+  |  +paramList:
+  |  +Statements:
+  |   | GLOBAL: 
+  |   |     IDENTIFIER: fail_counter
+  |   |     IDENTIFIER: success_counter
+  |   | PRINT:  (\n)
+  |   | PRINT:  (cont)
+  |   |     CALL:
+  |   |      +functionObj:
+  |   |       | CALL:
+  |   |       |  +functionObj:
+  |   |       |   | IDENTIFIER: send
+  |   |       |  +paramList:
+  |   |       |   | LITERAL: string(Total testcases = )
+  |   |       |   | LITERAL: string(__add__)
+  |   |      +paramList:
+  |   |       | CALL:
+  |   |       |  +functionObj:
+  |   |       |   | IDENTIFIER: str
+  |   |       |  +paramList:
+  |   |       |   | CALL:
+  |   |       |   |  +functionObj:
+  |   |       |   |   | CALL:
+  |   |       |   |   |  +functionObj:
+  |   |       |   |   |   | IDENTIFIER: send
+  |   |       |   |   |  +paramList:
+  |   |       |   |   |   | IDENTIFIER: fail_counter
+  |   |       |   |   |   | LITERAL: string(__add__)
+  |   |       |   |  +paramList:
+  |   |       |   |   | IDENTIFIER: success_counter
+  |   |     LITERAL: string(  )
+  |   | PRINT:  (\n)
+  |   |     CALL:
+  |   |      +functionObj:
+  |   |       | CALL:
+  |   |       |  +functionObj:
+  |   |       |   | IDENTIFIER: send
+  |   |       |  +paramList:
+  |   |       |   | LITERAL: string(Successful: )
+  |   |       |   | LITERAL: string(__add__)
+  |   |      +paramList:
+  |   |       | CALL:
+  |   |       |  +functionObj:
+  |   |       |   | IDENTIFIER: str
+  |   |       |  +paramList:
+  |   |       |   | IDENTIFIER: success_counter
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(assert self test)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | IDENTIFIER: True
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | IDENTIFIER: False
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(member test)
+  | ASSIGN: a
+  |     LITERAL: integer(2)
+  | CALL:
+  |  +functionObj:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: send
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(__setattr__)
+  |  +paramList:
+  |   | LITERAL: string(b)
+  |   | LITERAL: integer(2)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | IDENTIFIER: a
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: send
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(b)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(first class test)
+  | FUNDEF: what
+  |  +Symbol Table:
+  |     NORMAL: c
+  |     NORMAL: what_inner
+  |     REFERENCEONLY: a
+  |  +paramList:
+  |   | IDENTIFIER: c
+  |  +Statements:
+  |   | FUNDEF: what_inner
+  |   |  +Symbol Table:
+  |   |     NORMAL: b
+  |   |     REFERENCEONLY: c
+  |   |     REFERENCEONLY: a
+  |   |  +paramList:
+  |   |   | IDENTIFIER: b
+  |   |  +Statements:
+  |   |   | IF:
+  |   |   |  +condition:
+  |   |   |   | IDENTIFIER: c
+  |   |   |  +true:
+  |   |   |   | PRINT:  (cont)
+  |   |   |   |     LITERAL: string(True,)
+  |   |   |   | IF:
+  |   |   |   |  +condition:
+  |   |   |   |   | IDENTIFIER: b
+  |   |   |   |  +true:
+  |   |   |   |   | PRINT:  (cont)
+  |   |   |   |   |     LITERAL: string(True)
+  |   |   |   |  +false:
+  |   |   |   |   | PRINT:  (cont)
+  |   |   |   |   |     LITERAL: string(False)
+  |   |   |   | PRINT:  (cont)
+  |   |   |   |     LITERAL: string(a=)
+  |   |   |   |     IDENTIFIER: a
+  |   |   |   | RETURN: IDENTIFIER: c
+  |   |   |   |     IDENTIFIER: c
+  |   |   |  +false:
+  |   |   |   | PRINT:  (cont)
+  |   |   |   |     LITERAL: string(False,)
+  |   |   |   | IF:
+  |   |   |   |  +condition:
+  |   |   |   |   | IDENTIFIER: b
+  |   |   |   |  +true:
+  |   |   |   |   | PRINT:  (cont)
+  |   |   |   |   |     LITERAL: string(True)
+  |   |   |   |  +false:
+  |   |   |   |   | PRINT:  (cont)
+  |   |   |   |   |     LITERAL: string(False)
+  |   |   |   | PRINT:  (cont)
+  |   |   |   |     LITERAL: string(a=)
+  |   |   |   |     IDENTIFIER: a
+  |   |   |   | RETURN: IDENTIFIER: c
+  |   |   |   |     IDENTIFIER: c
+  |   | RETURN: IDENTIFIER: what_inner
+  |   |     IDENTIFIER: what_inner
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: what
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: a
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: a
+  |   |   |   | LITERAL: string(b)
+  |   | LITERAL: integer(2)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: what
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(0)
+  |   |  +paramList:
+  |   |   | LITERAL: float(0.0)
+  |   | LITERAL: integer(0)
+  | ASSIGN: a
+  |     LITERAL: integer(3)
+  | CALL:
+  |  +functionObj:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: send
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(__setattr__)
+  |  +paramList:
+  |   | LITERAL: string(what)
+  |   | IDENTIFIER: what
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | IDENTIFIER: a
+  |   |   |   |   | LITERAL: string(what)
+  |   |   |  +paramList:
+  |   |  +paramList:
+  |   |   | LITERAL: integer(0)
+  |   | LITERAL: integer(3)
+  | ASSIGN: a
+  |     LITERAL: float(0.0)
+  | CALL:
+  |  +functionObj:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: send
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(__setattr__)
+  |  +paramList:
+  |   | LITERAL: string(what)
+  |   | IDENTIFIER: what
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | IDENTIFIER: a
+  |   |   |   |   | LITERAL: string(what)
+  |   |   |  +paramList:
+  |   |  +paramList:
+  |   |   | LITERAL: integer(3)
+  |   | LITERAL: float(0f)
+  | PRINT:  (\n)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(reflection and overloading test)
+  | ASSIGN: a
+  |     LITERAL: float(0.0)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: type
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   | LITERAL: string(type:float)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: type
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: a
+  |   |   |   | LITERAL: string(__getattr__)
+  |   | LITERAL: string(type:built_in_function)
+  | CALL:
+  |  +functionObj:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: send
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(__setattr__)
+  |  +paramList:
+  |   | LITERAL: string(b)
+  |   | LITERAL: integer(3399)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: send
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(b)
+  |   | LITERAL: integer(3399)
+  | FUNDEF: newgetattr
+  |  +Symbol Table:
+  |     NORMAL: self
+  |     NORMAL: name
+  |  +paramList:
+  |   | IDENTIFIER: self
+  |   | IDENTIFIER: name
+  |  +Statements:
+  |   | RETURN: IDENTIFIER: name
+  |   |     IDENTIFIER: name
+  | CALL:
+  |  +functionObj:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: send
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(__setattr__)
+  |  +paramList:
+  |   | LITERAL: string(__getattr__)
+  |   | IDENTIFIER: newgetattr
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: type
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: a
+  |   |   |   | LITERAL: string(b)
+  |   | LITERAL: string(type:string)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: type
+  |   |  +paramList:
+  |   |   | IDENTIFIER: newgetattr
+  |   | LITERAL: string(type:function)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: send
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(b)
+  |   | LITERAL: string(b)
+  | CALL:
+  |  +functionObj:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: super
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(__setattr__)
+  |  +paramList:
+  |   | IDENTIFIER: a
+  |   | LITERAL: string(__getattr__)
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: super
+  |   |  +paramList:
+  |   |   | IDENTIFIER: a
+  |   |   | LITERAL: string(__getattr__)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | IDENTIFIER: type
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: a
+  |   |   |   | LITERAL: string(__getattr__)
+  |   | LITERAL: string(type:built_in_function)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(logic ops)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(0)
+  |   |   |   | LITERAL: string(__and__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(0)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(0)
+  |   |   |   | LITERAL: string(__and__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(1)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(1)
+  |   |   |   | LITERAL: string(__and__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(1)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(1)
+  |   |   |   | LITERAL: string(__and__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(0)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(0.0)
+  |   |   |   | LITERAL: string(__or__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(0.0)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(1.1)
+  |   |   |   | LITERAL: string(__or__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(0.0)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(1.0)
+  |   |   |   | LITERAL: string(__or__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(9.1)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(0f)
+  |   |   |   | LITERAL: string(__or__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(3.4)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: string()
+  |   |   |   | LITERAL: string(__not__)
+  |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: None
+  |   |   |   | LITERAL: string(__not__)
+  |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(1)
+  |   |   |   | LITERAL: string(__not__)
+  |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: False
+  |   |   |   | LITERAL: string(__not__)
+  |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(int relation test)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(gt)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(1)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(2)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(1)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(30)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(30)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(ge)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(1)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__ge__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(21)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__ge__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(302)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(302)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(lt)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(1)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(21)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(302)
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(302)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(le)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(1)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(21)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(302)
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(302)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(eq, ne)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(1)
+  |   |   |   | LITERAL: string(__eq__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(2)
+  |   |   |   | LITERAL: string(__eq__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(1)
+  |   |   |   | LITERAL: string(__ne__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(2)
+  |   |   |   | LITERAL: string(__ne__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(float relation test)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(gt)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(1f)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(2f)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(1f)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(30f)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(30f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(ge)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(1f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__ge__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(21f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__ge__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(302f)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(302f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(lt)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(1f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(21f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(302f)
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(302f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(le)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(1f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(21f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(302f)
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(302f)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(eq, ne)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(1f)
+  |   |   |   | LITERAL: string(__eq__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(2f)
+  |   |   |   | LITERAL: string(__eq__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(1f)
+  |   |   |   | LITERAL: string(__ne__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(2f)
+  |   |   |   | LITERAL: string(__ne__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(float int relation test)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(gt)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(1f)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(2f)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(1)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(30f)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(30)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(ge)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(1f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__ge__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(21f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__ge__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(302f)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(302)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(lt)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(1f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(21f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(302f)
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(302)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(le)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(1f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(21f)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(302f)
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(302)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(eq, ne)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(1f)
+  |   |   |   | LITERAL: string(__eq__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(2f)
+  |   |   |   | LITERAL: string(__eq__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(1f)
+  |   |   |   | LITERAL: string(__ne__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(2f)
+  |   |   |   | LITERAL: string(__ne__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(2)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(int float relation test)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(gt)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(1)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(2)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(1f)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(30)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(30f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(ge)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(1)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__ge__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(21)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__ge__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(302)
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(302f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(lt)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(1)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(21)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(302)
+  |   |   |   | LITERAL: string(__lt__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(302f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(le)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(1)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(21)
+  |   |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |   |  +paramList:
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: float(2f)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(302)
+  |   |   |   | LITERAL: string(__le__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(302f)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: sub_test_section
+  |  +paramList:
+  |   | LITERAL: string(eq, ne)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(1)
+  |   |   |   | LITERAL: string(__eq__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(2)
+  |   |   |   | LITERAL: string(__eq__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(1)
+  |   |   |   | LITERAL: string(__ne__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: True
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(2)
+  |   |   |   | LITERAL: string(__ne__)
+  |   |  +paramList:
+  |   |   | LITERAL: float(2f)
+  |   | IDENTIFIER: False
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(short arithmetic)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | CALL:
+  |   |   |   |   |   |  +functionObj:
+  |   |   |   |   |   |   | CALL:
+  |   |   |   |   |   |   |  +functionObj:
+  |   |   |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |   |   |  +paramList:
+  |   |   |   |   |   |   |   | LITERAL: integer(1)
+  |   |   |   |   |   |   |   | LITERAL: string(__add__)
+  |   |   |   |   |   |  +paramList:
+  |   |   |   |   |   |   | CALL:
+  |   |   |   |   |   |   |  +functionObj:
+  |   |   |   |   |   |   |   | CALL:
+  |   |   |   |   |   |   |   |  +functionObj:
+  |   |   |   |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |   |   |   |  +paramList:
+  |   |   |   |   |   |   |   |   | LITERAL: integer(2)
+  |   |   |   |   |   |   |   |   | LITERAL: string(__mult__)
+  |   |   |   |   |   |   |  +paramList:
+  |   |   |   |   |   |   |   | LITERAL: integer(3)
+  |   |   |   |   |   | LITERAL: string(__add__)
+  |   |   |   |  +paramList:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | CALL:
+  |   |   |   |   |   |  +functionObj:
+  |   |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |   |  +paramList:
+  |   |   |   |   |   |   | LITERAL: integer(4)
+  |   |   |   |   |   |   | LITERAL: string(__div__)
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(2)
+  |   |   |   | LITERAL: string(__add__)
+  |   |  +paramList:
+  |   |   | LITERAL: integer(10)
+  |   | LITERAL: integer(19)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(1.2)
+  |   |   |   |   |   | LITERAL: string(__add__)
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   | LITERAL: string(__sub__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | CALL:
+  |   |   |   |   |   |  +functionObj:
+  |   |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |   |  +paramList:
+  |   |   |   |   |   |   | LITERAL: integer(3)
+  |   |   |   |   |   |   | LITERAL: string(__mult__)
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(5)
+  |   |   |   |   | LITERAL: string(__div__)
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: integer(2)
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(3.8)
+  |   |   |   | LITERAL: string(__neg__)
+  |   |  +paramList:
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: float(1.2)
+  |   |   |   |   |   | LITERAL: string(__add__)
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(2)
+  |   |   |   | LITERAL: string(__sub__)
+  |   |  +paramList:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | CALL:
+  |   |   |   |   |  +functionObj:
+  |   |   |   |   |   | CALL:
+  |   |   |   |   |   |  +functionObj:
+  |   |   |   |   |   |   | IDENTIFIER: send
+  |   |   |   |   |   |  +paramList:
+  |   |   |   |   |   |   | LITERAL: integer(3)
+  |   |   |   |   |   |   | LITERAL: string(__mult__)
+  |   |   |   |   |  +paramList:
+  |   |   |   |   |   | LITERAL: integer(5)
+  |   |   |   |   | LITERAL: string(__div__)
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(2.0)
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | LITERAL: float(4.3)
+  |   |   |   | LITERAL: string(__neg__)
+  |   |  +paramList:
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(lambda function)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | LAMBDA: @lambda
+  |   |   |  +Symbol Table:
+  |   |   |     NORMAL: y
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: y
+  |   |   |  +Statements:
+  |   |   |   | RETURN: IDENTIFIER: y
+  |   |   |   |     IDENTIFIER: y
+  |   |  +paramList:
+  |   |   | LITERAL: integer(1)
+  |   | LITERAL: integer(1)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | LAMBDA: @lambda
+  |   |   |  +Symbol Table:
+  |   |   |     NORMAL: x
+  |   |   |     NORMAL: y
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: x
+  |   |   |   | IDENTIFIER: y
+  |   |   |  +Statements:
+  |   |   |   | RETURN: CALL:
+  |   |   |   |     CALL:
+  |   |   |   |      +functionObj:
+  |   |   |   |       | LAMBDA: @lambda
+  |   |   |   |       |  +Symbol Table:
+  |   |   |   |       |     NORMAL: y
+  |   |   |   |       |     NORMAL: z
+  |   |   |   |       |     REFERENCEONLY: x
+  |   |   |   |       |  +paramList:
+  |   |   |   |       |   | IDENTIFIER: y
+  |   |   |   |       |   | IDENTIFIER: z
+  |   |   |   |       |  +Statements:
+  |   |   |   |       |   | RETURN: CALL:
+  |   |   |   |       |   |     CALL:
+  |   |   |   |       |   |      +functionObj:
+  |   |   |   |       |   |       | CALL:
+  |   |   |   |       |   |       |  +functionObj:
+  |   |   |   |       |   |       |   | IDENTIFIER: send
+  |   |   |   |       |   |       |  +paramList:
+  |   |   |   |       |   |       |   | CALL:
+  |   |   |   |       |   |       |   |  +functionObj:
+  |   |   |   |       |   |       |   |   | CALL:
+  |   |   |   |       |   |       |   |   |  +functionObj:
+  |   |   |   |       |   |       |   |   |   | IDENTIFIER: send
+  |   |   |   |       |   |       |   |   |  +paramList:
+  |   |   |   |       |   |       |   |   |   | IDENTIFIER: x
+  |   |   |   |       |   |       |   |   |   | LITERAL: string(__add__)
+  |   |   |   |       |   |       |   |  +paramList:
+  |   |   |   |       |   |       |   |   | IDENTIFIER: y
+  |   |   |   |       |   |       |   | LITERAL: string(__add__)
+  |   |   |   |       |   |      +paramList:
+  |   |   |   |       |   |       | IDENTIFIER: z
+  |   |   |   |      +paramList:
+  |   |   |   |       | CALL:
+  |   |   |   |       |  +functionObj:
+  |   |   |   |       |   | CALL:
+  |   |   |   |       |   |  +functionObj:
+  |   |   |   |       |   |   | IDENTIFIER: send
+  |   |   |   |       |   |  +paramList:
+  |   |   |   |       |   |   | IDENTIFIER: x
+  |   |   |   |       |   |   | LITERAL: string(__add__)
+  |   |   |   |       |  +paramList:
+  |   |   |   |       |   | LITERAL: integer(1)
+  |   |   |   |       | IDENTIFIER: y
+  |   |  +paramList:
+  |   |   | LITERAL: integer(3)
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | CALL:
+  |   |   |   |  +functionObj:
+  |   |   |   |   | IDENTIFIER: send
+  |   |   |   |  +paramList:
+  |   |   |   |   | LITERAL: integer(3)
+  |   |   |   |   | LITERAL: string(__neg__)
+  |   |   |  +paramList:
+  |   | LITERAL: integer(4)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: new_test_section
+  |  +paramList:
+  |   | LITERAL: string(while test)
+  | ASSIGN: ctrl
+  |     LITERAL: integer(20)
+  | ASSIGN: var
+  |     LITERAL: integer(0)
+  | WHILE:
+  |  +condition:
+  |   | CALL:
+  |   |  +functionObj:
+  |   |   | CALL:
+  |   |   |  +functionObj:
+  |   |   |   | IDENTIFIER: send
+  |   |   |  +paramList:
+  |   |   |   | IDENTIFIER: ctrl
+  |   |   |   | LITERAL: string(__gt__)
+  |   |  +paramList:
+  |   |   | IDENTIFIER: var
+  |  +Statements:
+  |   | ASSIGN: var
+  |   |     CALL:
+  |   |      +functionObj:
+  |   |       | CALL:
+  |   |       |  +functionObj:
+  |   |       |   | IDENTIFIER: send
+  |   |       |  +paramList:
+  |   |       |   | IDENTIFIER: var
+  |   |       |   | LITERAL: string(__add__)
+  |   |      +paramList:
+  |   |       | LITERAL: integer(1)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | IDENTIFIER: var
+  |   | LITERAL: integer(20)
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: assert
+  |  +paramList:
+  |   | IDENTIFIER: ctrl
+  |   | IDENTIFIER: var
+  | CALL:
+  |  +functionObj:
+  |   | IDENTIFIER: print_test_result
+  |  +paramList:

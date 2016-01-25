@@ -1,0 +1,79 @@
+<project name="CS345Project" default="build.all">
+	<dirname file="${ant.file.CS345Project}" property="project.dir"/>
+	
+	<!-- get env in -->
+	<property environment="env" />
+	<!-- ============  Properties  ============ -->
+	<!--==== input location, these should exist already ==== -->
+	<property name="source.dir"    value="${project.dir}/src" />
+	<property name="grammer.file"  value="${source.dir}/grammar.jj" />
+	<property name="manifest.file" value="${source.dir}/Manifest.txt" />
+	
+	<!-- === output, these can be removed == -->
+	<property name="cc.output.dir"     value="${source.dir}/polite/parser" />
+	<property name="dest.dir"          value="${project.dir}/bin" />
+	<property name="jar.output.file"   value="${project.dir}/polite.jar" />
+	<property name="jjdoc.output.file" value="${project.dir}/grammar.html" />
+	
+
+	<!-- ============ Conditions ============ -->
+	<condition property="is.javacchome.set">
+		<isset property="env.JAVACC_HOME" />
+	</condition>
+	
+	<condition property="is.release.build">
+		<isset property="release" />
+	</condition>
+	
+	<!-- ============ Message ============ -->
+	<fail message="Please set JAVACC_HOME to javacc install location" unless="is.javacchome.set" />
+	
+	<!--================================================
+		Targets
+	 =================================================== -->
+	<!-- default target -->
+	<target name="build.all" depends="clean">
+		<antcall target="javacc.call" />
+		<antcall target="javac.call.release" />
+		<antcall target="javac.call.debug"   />
+	</target>
+
+	<target name="javacc.call" description="JavaCC invoking">
+		<echo message="Start JJ run" />
+		<javacc javacchome="${env.JAVACC_HOME}" target="${grammer.file}" outputdirectory="${cc.output.dir}" />
+		<antcall target="jjdoc.call" />
+		<delete>
+			<fileset dir="${source.dir}" includes="*.java" />
+		</delete>
+	</target>
+	
+	<target name="jjdoc.call" description="JJDoc generation">
+		<echo message="Generate JJ grammar rule in html format" />
+		<jjdoc target="${grammer.file}" javacchome="${env.JAVACC_HOME}" outputfile="${jjdoc.output.file}"/>
+	</target>
+
+	<target name="javac.call.release" if="is.release.build" description="polite jar publication">
+		<echo message="Preparing jar publication" />
+		<javac srcdir="${source.dir}" destdir="${dest.dir}" optimize="yes" />
+		<jar basedir="${dest.dir}" destfile="${jar.output.file}" manifest="${manifest.file}" />
+	</target>
+	
+	<target name="javac.call.debug" unless="is.release.build" description="polite debug build">
+		<echo message="Run ant with command line option '-Drelease=true' without quote to build jar release" />
+		<javac srcdir="${source.dir}" destdir="${dest.dir}" debug="on" >
+			<compilerarg value="-Xlint:unchecked"/>
+		</javac>
+	</target>
+
+	<target name="clean">
+		<echo message="Removing auto genereated parser files" />
+		<delete failonerror="false">
+			<fileset dir="${cc.output.dir}" includes="*.java" />
+		</delete>
+		<mkdir dir="${cc.output.dir}"/>
+		<echo message="Removing compiled binaries" />
+		<delete failonerror="false" dir="${dest.dir}" />
+		<mkdir dir="${dest.dir}"/>
+	</target>
+	
+</project>

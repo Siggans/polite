@@ -1,0 +1,531 @@
+ /**
+ * JavaCC file
+ */options{	STATIC = false;}PARSER_BEGIN(Parser)package polite.parser;import polite.abstractLanguage.AbstractSyntaxTree;
+import polite.abstractLanguage.Node;
+import polite.abstractLanguage.Operation;
+import polite.abstractLanguage.SymbolTable;
+import polite.interpreter.basicTypes.BaseType;
+import static polite.abstractLanguage.Node.*;
+import java.util.Stack;
+public class Parser{
+
+    public class Pair{
+        public Pair(Token t, Operation o){
+            tok=t;
+            op=o;
+        }
+        public final Token tok;
+        public final Operation op;
+    }
+    
+    public int setTabSize(int tabSize){
+        int oldSize=jj_input_stream.getTabSize(0);
+        jj_input_stream.setTabSize(tabSize);
+        return oldSize;
+    }
+    
+    
+    final private static boolean compareForValidNextLevel(
+            final String previous, final String current) {
+        if (previous.equals(current))
+            return false;
+        int s1, s2; // space and tab count for string 1, 2
+        s1 = s2 = 0;
+        for (int i = 0; i != previous.length(); i++) {
+            // let's assume tab count as 4 spaces
+            if (previous.charAt(i) == ' ')
+                s1++;
+            else
+                s1 += 4;
+        }
+        for (int i = 0; i != current.length(); i++) {
+            // let's assume tab count as 4 spaces
+            if (current.charAt(i) == ' ')
+                s2++;
+            else
+                s2 += 4;
+        }
+        return s2 > s1;
+    }
+
+    private Stack<String> levelStack;
+    private final String STACK_MARKER = "@";
+    private SymbolTable st;
+
+    public AbstractSyntaxTree start() {
+        AbstractSyntaxTree ast = new AbstractSyntaxTree();
+        levelStack = new Stack<String>();
+        setTabSize(4);
+        try {
+            Module module = ast.getMainModule();
+            st=module.initializeSymbolTable(null);
+            this.Module(module);
+            if (levelStack.empty() || !levelStack.pop().equals(STACK_MARKER)) {
+                throw new ParseException("Failure to balance block structure");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return ast;
+    }
+
+    private boolean checkIndent() throws ParseException {
+        return checkIndent(false);
+    }
+
+    private boolean checkIndent(final boolean isFirstIndent) throws ParseException{
+        String currentIndent=getIndent(isFirstIndent);
+        if(levelStack.peek().equals(currentIndent))
+            return true;
+        else if (levelStack.contains(currentIndent))
+            return false;
+        int i=2;
+        if(isFirstIndent){
+            if(getToken(1).kind!=EOL)
+                i=1;
+        }
+        if(getToken(i).kind==EOL)
+            return true;
+        throw getIndentationException(getToken(i));
+    }
+
+    private void toPreviousIndent() throws ParseException {
+        if(compareForValidNextLevel(levelStack.peek(),getIndent(false))
+                || levelStack.pop().equals(STACK_MARKER)){
+            throw getIndentationException(getToken(2));
+        }
+    }
+
+    private ParseException getIndentationException(Token tok) {
+        return new ParseException(String.format("Line %d, %d: '%s' ",
+                tok.beginLine,tok.beginColumn,tok.image)
+                +"bad indentataion or not a statement");
+    }
+
+    private void startNewIndent() throws ParseException {
+        if (levelStack.empty()) {
+            levelStack.push(STACK_MARKER);
+            levelStack.push("");
+            if (!checkIndent(true)) { // token can be 0 or 1, check kind
+                if (getToken(0).kind == EOL) {
+                    throw getIndentationException(getToken(1));
+                }
+                throw getIndentationException(getToken(0));
+
+            }
+        } else { // now valid token is on token 2
+            String currentIndent = getIndent(false);
+            if (!compareForValidNextLevel(levelStack.peek(), currentIndent)) {
+                throw getIndentationException(getToken(2));
+            }
+            levelStack.push(currentIndent);
+        }
+
+    }
+
+    /*
+     * this function should be placed before the NewLines()
+     * SameBlockStatements() which should be checked using LOOKAHEAD(2) (* let
+     * javacc handle most of error checking)
+     */
+    private String getIndent(final boolean isFirstIndent) {
+        Token desiredT, specialT;
+        if (isFirstIndent) { // first line of code!!
+            // NewLines may or may not have been called!
+            desiredT = getToken(1);
+            if (desiredT.kind == EOL) {
+                desiredT = getToken(2);
+            }
+        } else {
+            // Javacc alread check token for us (by using LOOKAHEAD(2))
+            desiredT = getToken(2);
+        }
+        specialT = desiredT.specialToken;
+        if (specialT == null) {
+            return "";
+        }
+        return specialT.image;
+    }
+    
+    private Node getMember(Token t, Operation op, Node obj, Node id){
+        Node str= new Literal(id.getToken(),BaseType.STRING);
+        return new Call(t,op,obj,str);
+    }
+    private static ParseException getScopeError(Token t, String msg){
+        return SymbolTable.getScopeError(t,msg);
+    }
+}//For ForEach():{ For f; Token t; Node id, generator;}{
+//	t=<FOR> id=Identifier(true,true) generator=InGenerate(id)<COLON_OP> 
+//	{ f = new For(t, generator); } 
+//	NextBlockContent(f)
+//	{ return f; }
+//}
+
+//InGenerator InGenerate(Node id):{ Token t; Node gen,gen2=null; }{
+//	t= <IN> 
+//	(	gen = Identifier(true,false) [gen=GetMemberOrMethodCall(gen)] 
+//	|	gen=ListTuple(true) [gen2=GetMemberOrMethodCall(gen)] 
+//		{ 	if(gen2==null)
+//				gen = new Call(gen.getToken(),Operation.ITER,gen,null);
+//			else
+//				gen=gen2;
+//		}
+//	)
+//	{ return new InGenerator(t, id, gen);}
+//}PARSER_END(Parser)SKIP : {	"\\\r\n"|	"\\\\n\r"
+|	"\\\n"|	"\\\r"}SPECIAL_TOKEN :{
+	< WS : ( " " | "\t" )+ >}TOKEN :{ // symbol operators
+	// list type
+	< LCURLY_OP : "{" >|	< RCURLY_OP : "}" >|	< LPRAN_OP :  "(" >|	< RPRAN_OP :  ")" >|	< LBRAK_OP :  "[" >|	< RBRAK_OP :  "]" >
+	// arth
+|	< MINUS_OP : "-" >|	< PLUS_OP :  "+" >|	< MULT_OP :  "*" >|	< DIV_OP :   "/" >|	< MOD_OP :   "%" >
+
+	// special
+|	< COLON_OP : ":" >|	< DOT_OP :   "." >|	< HBAR_OP :  "|" >|	< AT_OP :    "@" >|	< ASSIGN_OP :"=" >
+|	< COMMA_OP :",">
+	// logic
+|	< GT_OP : ">" >|	< GE_OP : ">=" >|	< LT_OP : "<" >|	< LE_OP : "<=" >|	< EQ_OP : "==" >|	< DIF_OP : "!=" >
+}
+
+TOKEN:{ // delimiter
+	< EOL : (<COMMENT>)? ("\r"| "\n" | "\r\n" | "\n\r") (("\t" | " ")*(<COMMENT>)?("\r"|"\n"|"\r\n"|"\n\r"))*>
+|	< #COMMENT: ("#"|"//") (~[ "\n", "\r" ])*  > // comment|	< SEMICOLON : ";" >}TOKEN :{ // keywords
+	< DEF :   "def"  >|	< CLASS : "class">|	< IF :    "if"   >|	< ELIF :  "elif" >|	< ELSE :  "else" >|	< PASS :  "pass" >|	< WHILE : "while">|	< AND:    "and"  >
+|	< OR:     "or"   >
+|	< NOT:    "not"  >
+|	< PRINT:  "print"  >
+|	< RETURN :"return" >
+|	< GLOBAL: "global" >
+
+}TOKEN :{	// constant
+	< None : "None" >|	< True : "True" >|	< False : "False" >}TOKEN :{ /* Literals */	<INTEGER : ([ "0"-"9" ])+ >|	< FLOAT :		([ "0"-"9" ])+ "." ([ "0"-"9" ])+ (< EXPONENT >)? ([ "f", "F" ])?	|	([ "0"-"9" ])+ < EXPONENT > ([ "f", "F", "d", "D" ])?	|	([ "0"-"9" ])+ (< EXPONENT >)? [ "f", "F", "d", "D" ] >|	< #EXPONENT : [ "e", "E" ] ([ "+", "-" ])? ([ "0"-"9" ])+ >|	< STRING : // raw string only		"\"" (~[ "\"", "\t", "\r", "\n" ] )* "\""	|	"'"  (~[ "'", "\t", "\r", "\n" ])* "'"
+	>|	< BLOCKQUOTE : "'''" <BLOCKSINGLEDELIM> "'''" | "\"\"\"" <BLOCKDOUBLEDELIM> "\"\"\"" >
+|	< #BLOCKSINGLEDELIM: ( ~["'"] | "'" ~["'"] | "''"~["'"])* >
+|	< #BLOCKDOUBLEDELIM: (~["\""] | "\""~["\""]|"\"\""~["\""])* >}TOKEN :{	< IDENTIFIER : ("_")* [ "a"-"z", "A"-"Z" ] 
+		([ "a"-"z", "A"-"Z", "0"-"9", "_" ])* >}TOKEN :{	< ERROR : ~[ ] >}
+void NewLines() :{}{
+	< EOL > 
+}
+void Module(Module module) :{}{	(	// start first indent
+		{
+			startNewIndent(); 
+		} 
+		[ LOOKAHEAD(2) 	( NewLines()) ] 
+		SameBlockStatements(module) 
+		[( NewLines() )] < EOF >
+		{
+			toPreviousIndent();
+		}// recover from indent
+		 
+	)}void SameBlockStatements(BlockNode bn) :{}{
+	LineContent(bn) 
+	(LOOKAHEAD(2)
+		{ if(!checkIndent()) return;} 
+		NewLines() LineContent(bn) 
+	)*
+	
+	
+}
+void LineContent(BlockNode bn) :{}{
+	StatementLine(bn)
+|	StartNewBlockStatement(bn)
+}
+
+void StatementLine(BlockNode bn) : {} {
+	Statement(bn) 
+	(	LOOKAHEAD(2) < SEMICOLON > StatementLine(bn)
+	|	LOOKAHEAD(2) [ < SEMICOLON > ]
+	)
+}
+
+void Statement(BlockNode bn) :{ Token t,t2=null; Node n=null; NodeList nl=null;}{
+	(	<PASS > { return; } // no op
+	|	<BLOCKQUOTE>{ return;}
+	|	t=<RETURN> [n=Expression()]
+		{	n = new Return(t, n); }
+//	|	t=<YIELD> n=Expression()//		{	n = new Yield(t, n);//			Node p= bn;//			while(p!=null){//				if(p instanceof FunDef){//					((FunDef)p).changeToGenerator();//					break;//				}//				p=p.getParent();//				if(p==null)//					throw new ParseException("Line: "+t.beginLine+" yield statement not in function block");//			}//		}
+	|	t=<PRINT> [ nl=ValueList(null) [t2=<COMMA_OP>]]
+		{	n = new Print(t,nl,t2); }
+	|	t=<GLOBAL> nl=IDList(null)
+		{	n = new Global(t, nl);
+			st.addGlobal(((Global)n).getList()); 
+		}
+	|	LOOKAHEAD(2) n=Identifier(true,false) n=MethodCallOrMemberAssignment(n)
+	|	LOOKAHEAD(2) n=Identifier(true,true)  n=Assignment(n,null)
+	|	n=FunctionCall() [ n=MethodCallOrMemberAssignment(n)]
+	)
+	{ bn.addStatement(n); }
+}
+
+
+void StartNewBlockStatement(BlockNode bn) :{ Node n;} {
+	// possible commands that will cause block structures are listed here
+	(
+		n=FunctionDef()
+	|	n=IfElse()
+	//|	n=ForEach()
+	|	n=While()
+	) { bn.addStatement(n); }
+}
+
+IfElse IfElse():{ IfElse head, current, newie; Node cond; Token t; }{
+	t=<IF> cond = Expression() <COLON_OP> 
+	{ head= new IfElse(t,cond); current=head;
+	}
+	NextBlockContent(current.getIfBlockHelper())
+	(	LOOKAHEAD(2) { if(!checkIndent()) return head; }
+		NewLines() t=<ELIF> cond=Expression()<COLON_OP>
+		{	newie = new IfElse(t,cond);
+			current.getElseBlockHelper().addStatement(newie);
+			current=newie;
+		}
+		NextBlockContent(current.getIfBlockHelper()))*
+	[	LOOKAHEAD(2) { if(!checkIndent()) return head; }
+		NewLines() <ELSE> <COLON_OP> 
+		NextBlockContent(current.getElseBlockHelper())]
+	{	return head; }
+}
+void NextBlockContent(BlockNode bn):{}{
+	( LOOKAHEAD(2) Block(bn) | StatementLine(bn))
+}
+  
+void Block(BlockNode bn) : {} {
+	// at block we alread know indentation checking is needed
+	(	{ startNewIndent();}
+		NewLines() SameBlockStatements(bn)
+		{ toPreviousIndent(); }
+	)
+}
+
+
+
+While While():{ Token t; Node cond; While w; }{
+	t=<WHILE> cond = Expression()<COLON_OP>
+	{ w = new While(t,cond); }
+	NextBlockContent(w)
+	{ return w; }
+}
+FunDef FunctionDef():{ Token t; Node id; NodeList param=null; FunDef fd; final SymbolTable oldst=st;}{
+	t=<DEF> id=Identifier(true,true) <LPRAN_OP>[param=IDList(null)]<RPRAN_OP> <COLON_OP>
+	{	fd = new FunDef(t,id.getToken().image,param, oldst);
+		st= fd.getSymbolTable();
+	}
+	NextBlockContent(fd)
+	{ st=oldst; return fd; }
+}
+
+Node Assignment(Node id, Node id2):{Token t; Node expr;}{
+	t=<ASSIGN_OP> ( expr=Expression() | expr=LambdaDef())
+	{	if(id2==null && id instanceof Identifier){
+			return new Assign(t,id.getToken().image,expr);
+		}
+		return Call.setAttr(t,id,(Identifier)id2,expr);
+	}
+}
+
+Node LambdaDef ():{ FunDef f; NodeList nl; Node expr; Token t;final SymbolTable oldst=st;}{
+	t=<AT_OP> nl=IDList(null) <COLON_OP> 
+	{	
+		f= new FunDef(t,nl,oldst);
+		st= f.getSymbolTable();
+	}
+	expr=Expression()
+	{
+		f.addStatement(new Return(t,expr));
+		st=oldst;
+		return f;
+	}
+}
+
+Node FunctionCall():{ Node node; NodeList nl; }{
+	(	<LPRAN_OP>node=LambdaDef()<RPRAN_OP><LPRAN_OP> nl=ValueList(null)<RPRAN_OP>
+		{ node = new Call(node,nl); }
+	|	LOOKAHEAD(2)node=Identifier(true,false) nl=ParamList()
+		{ node = new Call(node,nl); } 
+		(	nl=ParamList() { node = new Call(node,nl); } )*
+	)
+	{ return node ;}
+}
+
+NodeList ParamList():{ NodeList nl=null;}{
+	<LPRAN_OP>[nl=ValueList(null)]<RPRAN_OP>
+	{ return nl;}
+}
+
+Node MethodCallOrMemberAssignment(Node id):{Token t; Node id2; NodeList nl;}{
+	t=<DOT_OP> id2=Identifier(false,false) (
+	  	{id=getMember(t,Operation.GETATTR, id,id2);} 
+	  	id=MethodCallOrMemberAssignment(id)
+	|	id=Assignment(id,id2)
+	|	{id=getMember(t,Operation.GETATTR, id,id2);} 
+		nl=ParamList()
+		{id = new Call(id,nl);}
+		(nl=ParamList() {id=new Call(id,nl);})*
+		[id=GetMemberOrMethodCall(id)]
+	)
+	{return id;}
+}
+Node GetMemberOrMethodCall(Node id):{ Token dot;  NodeList nl; Node gttr, id2;}{
+	dot=<DOT_OP> id2=Identifier(false,false)
+	{gttr= getMember(dot,Operation.GETATTR,id,id2);}
+	[(	nl=ParamList()
+		{ gttr= new Call(gttr,nl); }
+		(nl=ParamList() {gttr=new Call(gttr,nl);})*
+		[ gttr=GetMemberOrMethodCall(gttr)] 
+	|	gttr=GetMemberOrMethodCall(gttr)
+	)]
+	{ return gttr;}
+ 
+}
+Node Expression():{Token t; Node e,e2;} {
+	e=LogicOr () ( 
+		t=<AND> e2=LogicOr()
+		{ e=new Call(t,Operation.AND,e,e2);}
+	)*
+	{return e;}
+}
+Node LogicOr():{Token t; Node e,e2;} {
+	e=LogicEq() (
+		t=<OR> e2=LogicEq()
+		{e=new Call(t,Operation.OR,e,e2);} 
+	)*
+	{return e;}
+}
+Node LogicEq():{Token t; Node e,e2;}{
+	e=LogicDiff() ( 
+		t=<EQ_OP> e2=LogicDiff()
+		{ e=new Call(t,Operation.EQ,e,e2);}
+	)*
+	{ return e; }
+}
+Node LogicDiff():{Token t; Node e,e2;} {
+	e=LogicRel () 
+	[(	t=<DIF_OP> e2=LogicRel()
+		{ e= new Call(t,Operation.NE,e,e2);} 
+	)]
+	{ return e;}
+}
+Node LogicRel():{Pair p; Node e,e2;} {
+	e=ArithAdd() 
+	[(	p=LogicRelOp() e2=ArithAdd()
+		{ e= new Call(p.tok,p.op,e,e2);}
+	)]
+	{ return e;}
+}
+Pair LogicRelOp():{Token t;} {
+	t=<GT_OP> { return new Pair(t,Operation.GT);}
+|	t=<GE_OP> { return new Pair(t,Operation.GE);}
+|	t=<LE_OP> { return new Pair(t,Operation.LE);}
+|	t=<LT_OP> { return new Pair(t,Operation.LT);}
+}
+Node ArithAdd():{Pair p; Node e,e2;}   {
+	e=ArithMul() 
+	(	p=ArithAddOp() e2=ArithMul()
+		{ e= new Call(p.tok,p.op,e,e2);}
+	)*
+	{return e;}
+}
+Pair ArithAddOp():{Token t;} {
+	t=<PLUS_OP> {return new Pair(t, Operation.PLUS);}
+|	t=<MINUS_OP>{return new Pair(t, Operation.MINUS);}
+}
+Node ArithMul():{Pair p; Node e,e2; }   {
+	e=ArithNegate() 
+	(	p=ArithMulOp() e2=ArithNegate()
+		{ e= new Call(p.tok,p.op,e,e2);}
+	)*
+	{return e;}
+}
+Pair ArithMulOp():{Token t;}{
+	t=< MULT_OP> {return new Pair(t,Operation.MULT);}
+|	t=< DIV_OP>  {return new Pair(t,Operation.DIV);}
+|	t=< MOD_OP > {return new Pair(t,Operation.MOD);}
+}
+Node ArithNegate():{ Token t; Node e; }{
+	e=LogicNot() {return e;}
+|	t=<MINUS_OP> e=LogicNot() {return new Call(t, Operation.NEG,e,null);} 
+}
+
+Node LogicNot(): { Token t; Node e;}{
+	t=<NOT> e=Element() { return new Call(t,Operation.NOT,e,null);} 
+|	e=Element() {return e;}
+}
+
+Node Element():{ Node e; }{
+	(	LOOKAHEAD(2) e=FunctionCall() [(e=GetMemberOrMethodCall(e))]
+	|	LOOKAHEAD(2) e=PrimaryValue()
+	|	e=Constant()
+	)
+	{ return e;} 
+}
+
+Node PrimaryValue():{ Node id; }{
+	(	id=Literal()
+	|	id=Identifier(true,false)
+	|	id=ListTuple(false)
+	) [(id=GetMemberOrMethodCall(id))]
+	{return id;}  
+}
+
+
+
+NodeList ValueList(NodeList nl):{ Node n; }{
+	{ if(nl==null) nl= new NodeList(); }
+	(n=Expression() | n=LambdaDef() )
+	{ nl.addNode(n); }
+	[LOOKAHEAD(2) <COMMA_OP> nl=ValueList(nl)]
+	{ return nl;}
+	
+}
+NodeList IDList(NodeList nl):{ Node n; }{
+	{ if(nl==null) nl= new NodeList(); }
+	n=Identifier(false, false)
+	{ nl.addNode(n); }
+	[LOOKAHEAD(2) <COMMA_OP> nl=IDList(nl)]
+	{ return nl;}
+	
+}
+
+Node ListTuple(boolean forceTuple):{ Token t, comma=null; NodeList nl=null;}{
+	(
+		t=<LPRAN_OP>[nl=ValueList(null)[LOOKAHEAD(2)comma=<COMMA_OP>]] <RPRAN_OP>
+		{ if(!forceTuple && nl!=null && nl.size()==1 && comma==null) return nl.getHead(); }
+	|	t=<LBRAK_OP>[nl=ValueList(null)[LOOKAHEAD(2)<COMMA_OP>]] <RBRAK_OP>
+	)
+	{	String s = t.kind==LPRAN_OP?"tuple":"list";
+		return new Call(new Identifier(t,s),nl);
+	}
+}
+
+Node Identifier(boolean checkST, boolean isAssign):{ Token t; Node n;}{
+	t=<IDENTIFIER> 
+	{
+		n=new Identifier(t,t.image);
+		if(checkST){
+			if(isAssign){
+				if(!st.hasVariable(n,false))
+					st.addVariable(n);
+				if(!st.testAssign(n))
+					throw getScopeError(t,"has type of "+st.getSymType(n)+" and cannot be assigned");
+			} else {
+				if(!st.hasVariable(n,true))
+					throw getScopeError(t,"has not been defined yet");
+				if(!st.testQuery(n))
+					throw getScopeError(t,"has not been initialized yet");
+			}
+		} 
+		return n;
+	}
+}
+
+Node Literal() :{ Token tok; }{	
+	tok = < INTEGER >    { return new Literal(tok,BaseType.INTEGER);}  
+|	tok = < FLOAT >      { return new Literal(tok,BaseType.FLOAT); }
+|	tok = < STRING >     { return new Literal(tok,BaseType.STRING);}
+|	tok = < BLOCKQUOTE > { return new Literal(tok,BaseType.STRING);}
+}
+Node Constant() :{ Token t; }{
+	( t=<None> | t=<True> | t=<False> )
+	{return new Identifier(t,t.image);}
+}
