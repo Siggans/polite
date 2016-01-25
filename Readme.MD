@@ -2,12 +2,13 @@
 
 VERSION: 0.0 pre-alpha
 
-This archive contains the necessary files needed to build the project
+Lauguage description can be found in polite.pdf
+
+This file describes the needed steps to compile
 
 ## Steps:
-    1. Unzip the content.
-    2. On console, go to your unzipped folder and run ant
-    3. type polite.bat 'yourtestfile' to run the interpreter
+    1. On console, go to this project's root folder folder and run ant
+    2. type polite.bat 'yourtestfile' to run the interpreter
 
 ## Content: (beside the obvious)
     src/testSyntax.in - some unittest to written in polite to test itself
